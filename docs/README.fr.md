@@ -42,7 +42,7 @@
 | Point d'entrée | [`MainActivity.kt`](../app/src/main/java/com/example/MainActivity.kt) |
 | ViewModel | [`BoardViewModel.kt`](../app/src/main/java/com/example/viewmodel/BoardViewModel.kt) |
 | Solveurs | [`PuzzleSolver.kt`](../app/src/main/java/com/example/solver/PuzzleSolver.kt) · [`ConstructiveSolver.kt`](../app/src/main/java/com/example/solver/ConstructiveSolver.kt) |
-| Plateau & HUD | [`PuzzleBoard.kt`](../app/src/main/java/com/example/ui/components/PuzzleBoard.kt) · [`GameHudAndControls.kt`](../app/src/main/java/com/example/ui/components/GameHudAndControls.kt) · [`SplashOverlay.kt`](../app/src/main/java/com/example/ui/components/SplashOverlay.kt) |
+| Plateau & HUD | [`PuzzleBoard.kt`](../app/src/main/java/com/example/ui/components/PuzzleBoard.kt) · [`GameHudAndControls.kt`](../app/src/main/java/com/example/ui/components/GameHudAndControls.kt) · [`avd_splash_tiles.xml`](../app/src/main/res/drawable/avd_splash_tiles.xml) |
 | Écrans | [`SetupScreen.kt`](../app/src/main/java/com/example/ui/screens/SetupScreen.kt) · [`SettingsScreen.kt`](../app/src/main/java/com/example/ui/screens/SettingsScreen.kt) |
 | Données & Thème | [`SettingsRepository.kt`](../app/src/main/java/com/example/data/SettingsRepository.kt) · [`SettingsState.kt`](../app/src/main/java/com/example/data/SettingsState.kt) · [`Theme.kt`](../app/src/main/java/com/example/ui/theme/Theme.kt) |
 | Tests & CI | [`ExampleUnitTest.kt`](../app/src/test/java/com/example/ExampleUnitTest.kt) · [`app/build.gradle.kts`](../app/build.gradle.kts) · [`release-apk.yml`](../.github/workflows/release-apk.yml) |

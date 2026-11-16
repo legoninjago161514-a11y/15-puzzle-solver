@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="288dp"
+    android:height="288dp"
+    android:viewportWidth="288"
+    android:viewportHeight="288">
+
+    <group
+        android:name="tray_group"
+        android:pivotX="144"
+        android:pivotY="144">
+
+        <!-- Outer Studio Tray Frame (104x104 inside 160dp safe circle) -->
+        <path
+            android:fillColor="#FF252421"
+            android:strokeColor="#FF3D3A34"
+            android:strokeWidth="1.5"
+            android:pathData="M 111,92 H 177 A 19,19 0 0 1 196,111 V 177 A 19,19 0 0 1 177,196 H 111 A 19,19 0 0 1 92,177 V 111 A 19,19 0 0 1 111,92 Z" />
+
+        <!-- Inner Recessed Tray Well -->
+        <path
+            android:fillColor="#FF191816"
+            android:pathData="M 109,95 H 179 A 14,14 0 0 1 193,109 V 179 A 14,14 0 0 1 179,193 H 109 A 14,14 0 0 1 95,179 V 109 A 14,14 0 0 1 109,95 Z" />
+
+        <!-- Empty Cell Wells (4 slots of 42x42 with 6px gap) -->
+        <path
+            android:fillColor="#FF121110"
+            android:pathData="M 108,99 H 132 A 9,9 0 0 1 141,108 V 132 A 9,9 0 0 1 132,141 H 108 A 9,9 0 0 1 99,132 V 108 A 9,9 0 0 1 108,99 Z" />
+        <path
+            android:fillColor="#FF121110"
+            android:pathData="M 156,99 H 180 A 9,9 0 0 1 189,108 V 132 A 9,9 0 0 1 180,141 H 156 A 9,9 0 0 1 147,132 V 108 A 9,9 0 0 1 156,99 Z" />
+        <path
+            android:fillColor="#FF121110"
+            android:pathData="M 108,147 H 132 A 9,9 0 0 1 141,156 V 180 A 9,9 0 0 1 132,189 H 108 A 9,9 0 0 1 99,180 V 156 A 9,9 0 0 1 108,147 Z" />
+        <path
+            android:fillColor="#FF121110"
+            android:pathData="M 156,147 H 180 A 9,9 0 0 1 189,156 V 180 A 9,9 0 0 1 180,189 H 156 A 9,9 0 0 1 147,180 V 156 A 9,9 0 0 1 156,147 Z" />
+
+        <!-- Tile 1 (Light Ceramic): starts at (1, 0) -> slides left to (0, 0) -->
+        <group
+            android:name="tile_1"
+            android:translateX="48"
+            android:translateY="0">
+            <!-- Keycap 3D lower bevel -->
+            <path
+                android:fillColor="#FFC8C1B2"
+                android:pathData="M 108,99 H 132 A 9,9 0 0 1 141,108 V 132 A 9,9 0 0 1 132,141 H 108 A 9,9 0 0 1 99,132 V 108 A 9,9 0 0 1 108,99 Z" />
+            <!-- Keycap top face -->
+            <path
+                android:fillColor="#FFF5F0E4"
+                android:pathData="M 107,99 H 133 A 8,8 0 0 1 141,107 V 129 A 8,8 0 0 1 133,137 H 107 A 8,8 0 0 1 99,129 V 107 A 8,8 0 0 1 107,99 Z" />
+            <!-- Subtle highlight rim -->
+            <path
+                android:strokeColor="#FFFFFFFF"
+                android:strokeAlpha="0.65"
+                android:strokeWidth="1.2"
+                android:strokeLineCap="round"
+                android:pathData="M 107,100.2 H 133" />
+            <!-- Digit "1" -->
+            <path
+                android:strokeColor="#FF22201E"
+                android:strokeWidth="2.8"
+                android:strokeLineCap="round"
+                android:strokeLineJoin="round"
+                android:pathData="M 116.5,113.5 L 120.5,110 L 120.5,126 M 116,126 H 124.5" />
+        </group>
+
+        <!-- Tile 2 (Slate Ceramic): starts at (1, 1) -> slides up to (1, 0) -->
+        <group
+            android:name="tile_2"
+            android:translateX="48"
+            android:translateY="48">
+            <path
+                android:fillColor="#FF23303D"
+                android:pathData="M 108,99 H 132 A 9,9 0 0 1 141,108 V 132 A 9,9 0 0 1 132,141 H 108 A 9,9 0 0 1 99,132 V 108 A 9,9 0 0 1 108,99 Z" />
+            <path
+                android:fillColor="#FF3D4E60"
+                android:pathData="M 107,99 H 133 A 8,8 0 0 1 141,107 V 129 A 8,8 0 0 1 133,137 H 107 A 8,8 0 0 1 99,129 V 107 A 8,8 0 0 1 107,99 Z" />
+            <path
+                android:strokeColor="#FFFFFFFF"
+                android:strokeAlpha="0.22"
+                android:strokeWidth="1.2"
+                android:strokeLineCap="round"
+                android:pathData="M 107,100.2 H 133" />
+            <!-- Digit "2" -->
+            <path
+                android:strokeColor="#FFF5F1E8"
+                android:strokeWidth="2.8"
+                android:strokeLineCap="round"
+                android:strokeLineJoin="round"
+                android:pathData="M 115.5,113.5 C 115.5,109 124.5,109 124.5,113.8 C 124.5,117.5 118,121.5 115.5,126 H 124.5" />
+        </group>
+
+        <!-- Tile 15 (Terracotta Accent): starts at (0, 0) -> slides down to (0, 1) -->
+        <group
+            android:name="tile_15"
+            android:translateX="0"
+            android:translateY="0">
+            <path
+                android:fillColor="#FF963419"
+                android:pathData="M 108,99 H 132 A 9,9 0 0 1 141,108 V 132 A 9,9 0 0 1 132,141 H 108 A 9,9 0 0 1 99,132 V 108 A 9,9 0 0 1 108,99 Z" />
+            <path
+                android:fillColor="#FFD85531"
+                android:pathData="M 107,99 H 133 A 8,8 0 0 1 141,107 V 129 A 8,8 0 0 1 133,137 H 107 A 8,8 0 0 1 99,129 V 107 A 8,8 0 0 1 107,99 Z" />
+            <path
+                android:strokeColor="#FFFFFFFF"
+                android:strokeAlpha="0.28"
+                android:strokeWidth="1.2"
+                android:strokeLineCap="round"
+                android:pathData="M 107,100.2 H 133" />
+            <!-- Digits "15" -->
+            <path
+                android:strokeColor="#FFFDFBF7"
+                android:strokeWidth="2.5"
+                android:strokeLineCap="round"
+                android:strokeLineJoin="round"
+                android:pathData="M 110.5,113.5 L 113.8,110.5 L 113.8,125.5 M 110.5,125.5 H 116.8 M 128,110.5 H 121.2 V 117.2 C 122.5,116.4 128.5,116.4 128.5,121.2 C 128.5,126 121.5,126.2 120.5,124.5" />
+        </group>
+
+    </group>
+</vector>

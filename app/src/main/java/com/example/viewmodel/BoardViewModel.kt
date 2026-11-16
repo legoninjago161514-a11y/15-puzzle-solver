@@ -127,6 +127,9 @@ class BoardViewModel(application: Application) : AndroidViewModel(application) {
     private val _showRulesSheet = MutableStateFlow(false)
     val showRulesSheet: StateFlow<Boolean> = _showRulesSheet.asStateFlow()
 
+    private val _isInitialSettingsLoaded = MutableStateFlow(false)
+    val isInitialSettingsLoaded: StateFlow<Boolean> = _isInitialSettingsLoaded.asStateFlow()
+
     // Persisted Preferences
     private val _appLanguage = MutableStateFlow(AppLanguage.SYSTEM)
     val appLanguage: StateFlow<AppLanguage> = _appLanguage.asStateFlow()
@@ -212,33 +215,37 @@ class BoardViewModel(application: Application) : AndroidViewModel(application) {
 
     init {
         viewModelScope.launch {
-            val saved = repository.settingsFlow.first()
-            _appLanguage.value = saved.appLanguage
-            _themeMode.value = saved.themeMode
-            _colorPalette.value = saved.colorPalette
-            _useDynamicColor.value = saved.useDynamicColor
-            _tileColorScheme.value = saved.tileColorScheme
-            _numberFormat.value = saved.numberFormat
-            _cornerRadiusStyle.value = saved.cornerRadiusStyle
-            _springAnimation.value = saved.springAnimation
-            _autoPlaySpeed.value = saved.autoPlaySpeed
-            _multiTileMove.value = saved.multiTileMove
-            _swipeGesturesEnabled.value = saved.swipeGesturesEnabled
-            _showHud.value = saved.showHud
-            _highlightCorrectTiles.value = saved.highlightCorrectTiles
-            _hapticMode.value = saved.hapticMode
-            _soundEnabled.value = saved.soundEnabled
-            _solverAlgorithm.value = saved.solverAlgorithm
-            _heuristicType.value = saved.heuristicType
-            _gamesWon.value = saved.gamesWon
+            try {
+                val saved = repository.settingsFlow.first()
+                _appLanguage.value = saved.appLanguage
+                _themeMode.value = saved.themeMode
+                _colorPalette.value = saved.colorPalette
+                _useDynamicColor.value = saved.useDynamicColor
+                _tileColorScheme.value = saved.tileColorScheme
+                _numberFormat.value = saved.numberFormat
+                _cornerRadiusStyle.value = saved.cornerRadiusStyle
+                _springAnimation.value = saved.springAnimation
+                _autoPlaySpeed.value = saved.autoPlaySpeed
+                _multiTileMove.value = saved.multiTileMove
+                _swipeGesturesEnabled.value = saved.swipeGesturesEnabled
+                _showHud.value = saved.showHud
+                _highlightCorrectTiles.value = saved.highlightCorrectTiles
+                _hapticMode.value = saved.hapticMode
+                _soundEnabled.value = saved.soundEnabled
+                _solverAlgorithm.value = saved.solverAlgorithm
+                _heuristicType.value = saved.heuristicType
+                _gamesWon.value = saved.gamesWon
 
-            if (saved.gridRows != _gridRows.value || saved.gridCols != _gridCols.value) {
-                _gridRows.value = saved.gridRows
-                _gridCols.value = saved.gridCols
-                val total = saved.gridRows * saved.gridCols
-                _boardState.value = (1 until total).toList() + listOf(0)
-                _setupBoard.value = List(total) { null }
-                updateSolvedState()
+                if (saved.gridRows != _gridRows.value || saved.gridCols != _gridCols.value) {
+                    _gridRows.value = saved.gridRows
+                    _gridCols.value = saved.gridCols
+                    val total = saved.gridRows * saved.gridCols
+                    _boardState.value = (1 until total).toList() + listOf(0)
+                    _setupBoard.value = List(total) { null }
+                    updateSolvedState()
+                }
+            } finally {
+                _isInitialSettingsLoaded.value = true
             }
         }
     }

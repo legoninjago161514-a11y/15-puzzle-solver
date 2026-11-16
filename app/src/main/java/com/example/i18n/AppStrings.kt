@@ -22,7 +22,6 @@ enum class AppLanguage(val code: String, val chipLabel: String, val nativeName: 
 
 data class AppStrings(
     val appTitle: String,
-    val splashTagline: String,
     val movesLabel: String,
     val timeLabel: String,
     val inPlaceLabel: String,
@@ -189,7 +188,6 @@ object StringsProvider {
 
 private val russianStrings = AppStrings(
     appTitle = "SlideGrid",
-    splashTagline = "Тактильная головоломка • 3×3 – 10×10",
     movesLabel = "Ходы",
     timeLabel = "Время",
     inPlaceLabel = "На месте",
@@ -381,7 +379,6 @@ private val russianStrings = AppStrings(
 
 private val englishStrings = AppStrings(
     appTitle = "SlideGrid",
-    splashTagline = "Tactile N-Puzzle • 3×3 – 10×10",
     movesLabel = "Moves",
     timeLabel = "Time",
     inPlaceLabel = "Aligned",
@@ -573,7 +570,6 @@ private val englishStrings = AppStrings(
 
 private val spanishStrings = englishStrings.copy(
     appTitle = "SlideGrid",
-    splashTagline = "Rompecabezas táctil • 3×3 – 10×10",
     movesLabel = "Movs",
     timeLabel = "Tiempo",
     inPlaceLabel = "En sitio",
@@ -635,7 +631,6 @@ private val spanishStrings = englishStrings.copy(
 
 private val germanStrings = englishStrings.copy(
     appTitle = "SlideGrid",
-    splashTagline = "Taktiles Schiebepuzzle • 3×3 – 10×10",
     movesLabel = "Züge",
     timeLabel = "Zeit",
     inPlaceLabel = "Korrekt",
@@ -697,7 +692,6 @@ private val germanStrings = englishStrings.copy(
 
 private val frenchStrings = englishStrings.copy(
     appTitle = "SlideGrid",
-    splashTagline = "Taquin tactile • 3×3 – 10×10",
     movesLabel = "Coups",
     timeLabel = "Temps",
     inPlaceLabel = "Placés",

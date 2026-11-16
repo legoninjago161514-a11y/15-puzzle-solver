@@ -108,10 +108,9 @@
         │       ├── viewmodel/                       # Бизнес-логика и состояние игры
         │       │   └── BoardViewModel.kt
         │       └── ui/
-        │           ├── components/                  # Игровое поле, HUD, заставка и диалоги
+        │           ├── components/                  # Игровое поле, HUD и диалоги
         │           │   ├── PuzzleBoard.kt
-        │           │   ├── GameHudAndControls.kt
-        │           │   └── SplashOverlay.kt
+        │           │   └── GameHudAndControls.kt
         │           ├── screens/                     # Экран настроек и «Своя доска»
         │           │   ├── SetupScreen.kt
         │           │   └── SettingsScreen.kt
@@ -133,7 +132,7 @@
 | **ViewModel** | [`BoardViewModel.kt`](../app/src/main/java/com/example/viewmodel/BoardViewModel.kt) | Логика ходов, таймер, история отмены, рекорды, буфер обмена, запуск решателей и бенчмарка |
 | **Решатель (`IDA*`)** | [`PuzzleSolver.kt`](../app/src/main/java/com/example/solver/PuzzleSolver.kt) | Алгоритм IDA*, манхэттенское расстояние и линейные конфликты |
 | **Решатель (`10×10`)** | [`ConstructiveSolver.kt`](../app/src/main/java/com/example/solver/ConstructiveSolver.kt) | Послойный конструктивный алгоритм и оптимизация последовательности ходов |
-| **Игровое поле** | [`PuzzleBoard.kt`](../app/src/main/java/com/example/ui/components/PuzzleBoard.kt) · [`SplashOverlay.kt`](../app/src/main/java/com/example/ui/components/SplashOverlay.kt) | Плитки-кейкапы с физикой пружин, свайпами, анимацией входа и конфетти |
+| **Игровое поле** | [`PuzzleBoard.kt`](../app/src/main/java/com/example/ui/components/PuzzleBoard.kt) · [`avd_splash_tiles.xml`](../app/src/main/res/drawable/avd_splash_tiles.xml) | Плитки-кейкапы, пружины, системная AVD-заставка и конфетти |
 | **HUD и диалоги** | [`GameHudAndControls.kt`](../app/src/main/java/com/example/ui/components/GameHudAndControls.kt) | Статистика, плеер решения, выбор сетки, модальное окно победы и справка |
 | **Своя доска** | [`SetupScreen.kt`](../app/src/main/java/com/example/ui/screens/SetupScreen.kt) | Быстрая палитра плиток, цифровая клавиатура, Drag & Drop лоток и контроль решаемости |
 | **Настройки** | [`SettingsScreen.kt`](../app/src/main/java/com/example/ui/screens/SettingsScreen.kt) | Живой предпросмотр `3×3`, выбор языка, палитр, физики и параметров решателя |

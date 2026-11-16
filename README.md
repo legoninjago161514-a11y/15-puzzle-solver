@@ -111,10 +111,9 @@
         │       ├── viewmodel/                       # State management & game logic
         │       │   └── BoardViewModel.kt
         │       └── ui/
-        │           ├── components/                  # Reusable game UI, splash & tactile board
+        │           ├── components/                  # Reusable game UI & tactile board
         │           │   ├── PuzzleBoard.kt
-        │           │   ├── GameHudAndControls.kt
-        │           │   └── SplashOverlay.kt
+        │           │   └── GameHudAndControls.kt
         │           ├── screens/                     # Secondary screens
         │           │   ├── SetupScreen.kt
         │           │   └── SettingsScreen.kt
@@ -136,7 +135,7 @@
 | **ViewModel** | [`BoardViewModel.kt`](app/src/main/java/com/example/viewmodel/BoardViewModel.kt) | Board state, timer, undo stack, records, clipboard I/O, solver & benchmark orchestration |
 | **Solver (`IDA*`)** | [`PuzzleSolver.kt`](app/src/main/java/com/example/solver/PuzzleSolver.kt) | Iterative Deepening A* search, Manhattan & Linear Conflict heuristics |
 | **Solver (`10×10`)** | [`ConstructiveSolver.kt`](app/src/main/java/com/example/solver/ConstructiveSolver.kt) | Constructive layer-by-layer reduction & redundant move optimizer |
-| **Game Board** | [`PuzzleBoard.kt`](app/src/main/java/com/example/ui/components/PuzzleBoard.kt) · [`SplashOverlay.kt`](app/src/main/java/com/example/ui/components/SplashOverlay.kt) | Keycap tiles, spring animations, drag gestures, animated splash & confetti |
+| **Game Board** | [`PuzzleBoard.kt`](app/src/main/java/com/example/ui/components/PuzzleBoard.kt) · [`avd_splash_tiles.xml`](app/src/main/res/drawable/avd_splash_tiles.xml) | Keycap tiles, spring animations, native AVD splash & confetti |
 | **HUD & Dialogs** | [`GameHudAndControls.kt`](app/src/main/java/com/example/ui/components/GameHudAndControls.kt) | Telemetry strip, solution player, grid selector, victory & guide sheets |
 | **Custom Setup** | [`SetupScreen.kt`](app/src/main/java/com/example/ui/screens/SetupScreen.kt) | Tile palette, numeric keypad, drag tray & parity check |
 | **Settings** | [`SettingsScreen.kt`](app/src/main/java/com/example/ui/screens/SettingsScreen.kt) | Live preview board, theme/palette controls, solver options & benchmark UI |

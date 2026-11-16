@@ -1,13 +1,20 @@
 package com.example
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.app.Activity
 import android.os.Bundle
 import android.view.SoundEffectConstants
+import android.view.View
+import android.view.animation.AccelerateInterpolator
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.core.animation.doOnEnd
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.lifecycle.ViewModelProvider
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.FastOutSlowInEasing
@@ -65,7 +72,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -95,7 +101,6 @@ import com.example.ui.components.GameTelemetryStrip
 import com.example.ui.components.GridSizeDialog
 import com.example.ui.components.PuzzleBoard
 import com.example.ui.components.RulesBottomSheet
-import com.example.ui.components.SplashOverlay
 import com.example.ui.components.VictoryConfettiOverlay
 import com.example.ui.components.VictoryDialog
 import com.example.ui.screens.SettingsScreen
@@ -106,17 +111,38 @@ import com.example.viewmodel.BoardViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        val viewModel = ViewModelProvider(this)[BoardViewModel::class.java]
+        splashScreen.setKeepOnScreenCondition { !viewModel.isInitialSettingsLoaded.value }
+        splashScreen.setOnExitAnimationListener { splashProvider ->
+            val animDuration = splashProvider.iconAnimationDurationMillis
+            val animStart = splashProvider.iconAnimationStartMillis
+            val elapsed = if (animStart > 0L) System.currentTimeMillis() - animStart else 0L
+            val remaining = if (animDuration > 0L) (animDuration - elapsed).coerceIn(0L, 620L) else 0L
+
+            val fadeOut = ObjectAnimator.ofFloat(splashProvider.view, View.ALPHA, 1f, 0f)
+            val iconScaleX = ObjectAnimator.ofFloat(splashProvider.iconView, View.SCALE_X, 1f, 1.16f)
+            val iconScaleY = ObjectAnimator.ofFloat(splashProvider.iconView, View.SCALE_Y, 1f, 1.16f)
+
+            AnimatorSet().apply {
+                playTogether(fadeOut, iconScaleX, iconScaleY)
+                duration = 240L
+                startDelay = remaining
+                interpolator = AccelerateInterpolator()
+                doOnEnd { splashProvider.remove() }
+                start()
+            }
+        }
+
         setContent {
-            val viewModel: BoardViewModel = viewModel()
             val appLanguage by viewModel.appLanguage.collectAsState()
             val themeMode by viewModel.themeMode.collectAsState()
             val colorPalette by viewModel.colorPalette.collectAsState()
             val useDynamicColor by viewModel.useDynamicColor.collectAsState()
             val strings = remember(appLanguage) { StringsProvider.resolve(appLanguage) }
-
-            var showSplash by rememberSaveable { mutableStateOf(true) }
 
             CompositionLocalProvider(LocalStrings provides strings) {
                 MyApplicationTheme(
@@ -124,34 +150,7 @@ class MainActivity : ComponentActivity() {
                     colorPalette = colorPalette,
                     dynamicColor = useDynamicColor
                 ) {
-                    val contentScale by animateFloatAsState(
-                        targetValue = if (showSplash) 0.965f else 1f,
-                        animationSpec = tween(380, easing = FastOutSlowInEasing),
-                        label = "appRevealScale"
-                    )
-                    Box(modifier = Modifier.fillMaxSize()) {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .graphicsLayer {
-                                    scaleX = contentScale
-                                    scaleY = contentScale
-                                }
-                        ) {
-                            PuzzleAppRoot(viewModel = viewModel)
-                        }
-
-                        AnimatedVisibility(
-                            visible = showSplash,
-                            exit = fadeOut(tween(320, easing = FastOutSlowInEasing)) +
-                                scaleOut(tween(320, easing = FastOutSlowInEasing), targetScale = 1.05f)
-                        ) {
-                            BackHandler(enabled = showSplash) {
-                                showSplash = false
-                            }
-                            SplashOverlay(onFinished = { showSplash = false })
-                        }
-                    }
+                    PuzzleAppRoot(viewModel = viewModel)
                 }
             }
         }
