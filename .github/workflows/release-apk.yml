@@ -53,7 +53,7 @@ jobs:
             keytool -genkeypair -noprompt -keystore my-upload-key.jks -alias upload \
               -keyalg RSA -keysize 2048 -validity 10000 \
               -storepass "$STORE_PW" -keypass "$KEY_PW" \
-              -dname "CN=15 Puzzle, OU=App, O=15Puzzle, L=World, C=US"
+              -dname "CN=SlideGrid, OU=App, O=SlideGrid, L=World, C=US"
           fi
 
       - name: Run unit tests
@@ -74,18 +74,18 @@ jobs:
             TAG="v1.0.0"
           fi
           echo "tag=$TAG" >> "$GITHUB_OUTPUT"
-          cp app/build/outputs/apk/release/app-release.apk "15-puzzle-${TAG}.apk"
+          cp app/build/outputs/apk/release/app-release.apk "slidegrid-${TAG}.apk"
 
       - name: Upload APK workflow artifact
         uses: actions/upload-artifact@v4
         with:
-          name: 15-puzzle-apk-${{ steps.meta.outputs.tag }}
-          path: 15-puzzle-${{ steps.meta.outputs.tag }}.apk
+          name: slidegrid-apk-${{ steps.meta.outputs.tag }}
+          path: slidegrid-${{ steps.meta.outputs.tag }}.apk
 
       - name: Publish GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.meta.outputs.tag }}
-          name: 15 Puzzle ${{ steps.meta.outputs.tag }}
-          files: 15-puzzle-${{ steps.meta.outputs.tag }}.apk
+          name: SlideGrid ${{ steps.meta.outputs.tag }}
+          files: slidegrid-${{ steps.meta.outputs.tag }}.apk
           generate_release_notes: true

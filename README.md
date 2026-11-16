@@ -1,6 +1,6 @@
 <div align="center">
 
-# 15 Puzzle — Tactile Studio & Hybrid Solver
+# SlideGrid — Tactile N-Puzzle & Hybrid Solver
 
 **A modern sliding puzzle (`3×3` to `10×10`) for Android built with Kotlin & Jetpack Compose**
 
@@ -35,7 +35,7 @@
 
 ## Overview
 
-**15 Puzzle** combines tactile industrial design (matte ceramic keycap tiles, physical press bevels, curated editorial palettes) with a high-performance dual-engine algorithmic solver capable of solving classic `3×3` / `4×4` boards optimally and reducing arbitrary `10×10` permutations in milliseconds — completely offline, with zero ads or trackers.
+**SlideGrid** combines tactile industrial design (matte ceramic keycap tiles, physical press bevels, animated keycap startup choreography, curated editorial palettes) with a high-performance dual-engine algorithmic solver capable of solving classic `3×3` / `4×4` boards optimally and reducing arbitrary `10×10` permutations in milliseconds — completely offline, with zero ads or trackers.
 
 ---
 
@@ -111,9 +111,10 @@
         │       ├── viewmodel/                       # State management & game logic
         │       │   └── BoardViewModel.kt
         │       └── ui/
-        │           ├── components/                  # Reusable game UI & tactile board
+        │           ├── components/                  # Reusable game UI, splash & tactile board
         │           │   ├── PuzzleBoard.kt
-        │           │   └── GameHudAndControls.kt
+        │           │   ├── GameHudAndControls.kt
+        │           │   └── SplashOverlay.kt
         │           ├── screens/                     # Secondary screens
         │           │   ├── SetupScreen.kt
         │           │   └── SettingsScreen.kt
@@ -135,7 +136,7 @@
 | **ViewModel** | [`BoardViewModel.kt`](app/src/main/java/com/example/viewmodel/BoardViewModel.kt) | Board state, timer, undo stack, records, clipboard I/O, solver & benchmark orchestration |
 | **Solver (`IDA*`)** | [`PuzzleSolver.kt`](app/src/main/java/com/example/solver/PuzzleSolver.kt) | Iterative Deepening A* search, Manhattan & Linear Conflict heuristics |
 | **Solver (`10×10`)** | [`ConstructiveSolver.kt`](app/src/main/java/com/example/solver/ConstructiveSolver.kt) | Constructive layer-by-layer reduction & redundant move optimizer |
-| **Game Board** | [`PuzzleBoard.kt`](app/src/main/java/com/example/ui/components/PuzzleBoard.kt) | Keycap tiles, spring animations, drag gestures & confetti overlay |
+| **Game Board** | [`PuzzleBoard.kt`](app/src/main/java/com/example/ui/components/PuzzleBoard.kt) · [`SplashOverlay.kt`](app/src/main/java/com/example/ui/components/SplashOverlay.kt) | Keycap tiles, spring animations, drag gestures, animated splash & confetti |
 | **HUD & Dialogs** | [`GameHudAndControls.kt`](app/src/main/java/com/example/ui/components/GameHudAndControls.kt) | Telemetry strip, solution player, grid selector, victory & guide sheets |
 | **Custom Setup** | [`SetupScreen.kt`](app/src/main/java/com/example/ui/screens/SetupScreen.kt) | Tile palette, numeric keypad, drag tray & parity check |
 | **Settings** | [`SettingsScreen.kt`](app/src/main/java/com/example/ui/screens/SettingsScreen.kt) | Live preview board, theme/palette controls, solver options & benchmark UI |
@@ -151,7 +152,7 @@
 1. **Clone the repository** and open it in **Android Studio** (JDK 21 / Android SDK 36) or use **Gradle 9.3.1**:
    ```bash
    git clone <repository-url>
-   cd 15-puzzle-android
+   cd slidegrid-android
    ```
 2. **Run all unit & Robolectric tests**:
    ```bash

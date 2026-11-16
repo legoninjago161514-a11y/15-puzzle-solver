@@ -741,7 +741,7 @@ fun SettingsScreen(viewModel: BoardViewModel) {
                                 .padding(end = 12.dp)
                         ) {
                             Text(
-                                text = "15 Puzzle • v${BuildConfig.VERSION_NAME}",
+                                text = "SlideGrid • v${BuildConfig.VERSION_NAME}",
                                 fontSize = 13.sp,
                                 fontWeight = FontWeight.SemiBold,
                                 maxLines = 1,

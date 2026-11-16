@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">15 Puzzle</string>
+    <string name="app_name">SlideGrid</string>
     <string name="shuffle_button">Случайное перемешивание</string>
-    <string name="app_title">Пятнашки</string>
+    <string name="app_title">SlideGrid</string>
     <string name="solve_button">Решить</string>
     <string name="solving">Поиск решения...</string>
     <string name="next_step">Следующий шаг</string>

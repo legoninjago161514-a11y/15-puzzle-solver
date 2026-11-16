@@ -65,6 +65,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -94,6 +95,7 @@ import com.example.ui.components.GameTelemetryStrip
 import com.example.ui.components.GridSizeDialog
 import com.example.ui.components.PuzzleBoard
 import com.example.ui.components.RulesBottomSheet
+import com.example.ui.components.SplashOverlay
 import com.example.ui.components.VictoryConfettiOverlay
 import com.example.ui.components.VictoryDialog
 import com.example.ui.screens.SettingsScreen
@@ -114,13 +116,42 @@ class MainActivity : ComponentActivity() {
             val useDynamicColor by viewModel.useDynamicColor.collectAsState()
             val strings = remember(appLanguage) { StringsProvider.resolve(appLanguage) }
 
+            var showSplash by rememberSaveable { mutableStateOf(true) }
+
             CompositionLocalProvider(LocalStrings provides strings) {
                 MyApplicationTheme(
                     themeMode = themeMode,
                     colorPalette = colorPalette,
                     dynamicColor = useDynamicColor
                 ) {
-                    PuzzleAppRoot(viewModel = viewModel)
+                    val contentScale by animateFloatAsState(
+                        targetValue = if (showSplash) 0.965f else 1f,
+                        animationSpec = tween(380, easing = FastOutSlowInEasing),
+                        label = "appRevealScale"
+                    )
+                    Box(modifier = Modifier.fillMaxSize()) {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .graphicsLayer {
+                                    scaleX = contentScale
+                                    scaleY = contentScale
+                                }
+                        ) {
+                            PuzzleAppRoot(viewModel = viewModel)
+                        }
+
+                        AnimatedVisibility(
+                            visible = showSplash,
+                            exit = fadeOut(tween(320, easing = FastOutSlowInEasing)) +
+                                scaleOut(tween(320, easing = FastOutSlowInEasing), targetScale = 1.05f)
+                        ) {
+                            BackHandler(enabled = showSplash) {
+                                showSplash = false
+                            }
+                            SplashOverlay(onFinished = { showSplash = false })
+                        }
+                    }
                 }
             }
         }

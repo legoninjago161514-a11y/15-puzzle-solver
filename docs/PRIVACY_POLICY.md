@@ -1,8 +1,8 @@
-# Privacy Policy — 15 Puzzle
+# Privacy Policy — SlideGrid
 
 Effective date: November 15, 2026
 
-**15 Puzzle** is an offline-first puzzle game. Protecting user privacy is built into the architecture of the application.
+**SlideGrid** is an offline-first puzzle game. Protecting user privacy is built into the architecture of the application.
 
 ## Data Collection
 

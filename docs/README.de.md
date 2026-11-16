@@ -1,6 +1,6 @@
 <div align="center">
 
-# 15er-Puzzle — Tactile Studio & Hybrider Solver
+# SlideGrid — Tactile Studio & Hybrider Solver
 
 **Modernes Schiebepuzzle (`3×3` bis `10×10`) für Android mit Kotlin & Jetpack Compose**
 
@@ -23,7 +23,7 @@
 
 ## Überblick
 
-**15er-Puzzle** verbindet taktiles Industriedesign mit einer leistungsstarken hybriden Lösungs-Engine: optimale Lösungen für Bretter bis `4×4` per `IDA*` sowie blitzschnelle schichtweise Reduktion bis `10×10` — komplett offline, ohne Werbung oder Tracking.
+**SlideGrid** verbindet taktiles Industriedesign mit einer leistungsstarken hybriden Lösungs-Engine: optimale Lösungen für Bretter bis `4×4` per `IDA*` sowie blitzschnelle schichtweise Reduktion bis `10×10` — komplett offline, ohne Werbung oder Tracking.
 
 ## Funktionen
 
@@ -42,7 +42,7 @@
 | Einstiegspunkt | [`MainActivity.kt`](../app/src/main/java/com/example/MainActivity.kt) |
 | ViewModel | [`BoardViewModel.kt`](../app/src/main/java/com/example/viewmodel/BoardViewModel.kt) |
 | Lösungsalgorithmen | [`PuzzleSolver.kt`](../app/src/main/java/com/example/solver/PuzzleSolver.kt) · [`ConstructiveSolver.kt`](../app/src/main/java/com/example/solver/ConstructiveSolver.kt) |
-| Spielfeld & HUD | [`PuzzleBoard.kt`](../app/src/main/java/com/example/ui/components/PuzzleBoard.kt) · [`GameHudAndControls.kt`](../app/src/main/java/com/example/ui/components/GameHudAndControls.kt) |
+| Spielfeld & HUD | [`PuzzleBoard.kt`](../app/src/main/java/com/example/ui/components/PuzzleBoard.kt) · [`GameHudAndControls.kt`](../app/src/main/java/com/example/ui/components/GameHudAndControls.kt) · [`SplashOverlay.kt`](../app/src/main/java/com/example/ui/components/SplashOverlay.kt) |
 | Bildschirme | [`SetupScreen.kt`](../app/src/main/java/com/example/ui/screens/SetupScreen.kt) · [`SettingsScreen.kt`](../app/src/main/java/com/example/ui/screens/SettingsScreen.kt) |
 | Daten & Theme | [`SettingsRepository.kt`](../app/src/main/java/com/example/data/SettingsRepository.kt) · [`SettingsState.kt`](../app/src/main/java/com/example/data/SettingsState.kt) · [`Theme.kt`](../app/src/main/java/com/example/ui/theme/Theme.kt) |
 | Tests & CI | [`ExampleUnitTest.kt`](../app/src/test/java/com/example/ExampleUnitTest.kt) · [`app/build.gradle.kts`](../app/build.gradle.kts) · [`release-apk.yml`](../.github/workflows/release-apk.yml) |

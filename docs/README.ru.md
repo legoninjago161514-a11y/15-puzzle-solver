@@ -1,6 +1,6 @@
 <div align="center">
 
-# Пятнашки (15 Puzzle) — Tactile Studio и Гибридный Решатель
+# SlideGrid — Тактильные пятнашки и Гибридный Решатель
 
 **Современная головоломка для Android (`3×3` — `10×10`) на Kotlin и Jetpack Compose**
 
@@ -35,7 +35,7 @@
 
 ## О проекте
 
-**«Пятнашки» (15 Puzzle)** объединяет тактильный дизайн в стиле студийной аппаратуры (матовые керамические плитки с объемным профилем нажатия и авторскими палитрами) с быстрым гибридным решателем. Приложение находит кратчайший путь на полях до `4×4` и мгновенно собирает большие сетки до `10×10` — полностью офлайн, без рекламы и слежки.
+**SlideGrid** объединяет тактильный дизайн в стиле студийной аппаратуры (матовые керамические плитки с объемным профилем нажатия, анимированную входную сцену и авторские палитры) с быстрым гибридным решателем. Приложение находит кратчайший путь на полях до `4×4` и мгновенно собирает большие сетки до `10×10` — полностью офлайн, без рекламы и слежки.
 
 ---
 
@@ -108,9 +108,10 @@
         │       ├── viewmodel/                       # Бизнес-логика и состояние игры
         │       │   └── BoardViewModel.kt
         │       └── ui/
-        │           ├── components/                  # Игровое поле, HUD и диалоги
+        │           ├── components/                  # Игровое поле, HUD, заставка и диалоги
         │           │   ├── PuzzleBoard.kt
-        │           │   └── GameHudAndControls.kt
+        │           │   ├── GameHudAndControls.kt
+        │           │   └── SplashOverlay.kt
         │           ├── screens/                     # Экран настроек и «Своя доска»
         │           │   ├── SetupScreen.kt
         │           │   └── SettingsScreen.kt
@@ -132,7 +133,7 @@
 | **ViewModel** | [`BoardViewModel.kt`](../app/src/main/java/com/example/viewmodel/BoardViewModel.kt) | Логика ходов, таймер, история отмены, рекорды, буфер обмена, запуск решателей и бенчмарка |
 | **Решатель (`IDA*`)** | [`PuzzleSolver.kt`](../app/src/main/java/com/example/solver/PuzzleSolver.kt) | Алгоритм IDA*, манхэттенское расстояние и линейные конфликты |
 | **Решатель (`10×10`)** | [`ConstructiveSolver.kt`](../app/src/main/java/com/example/solver/ConstructiveSolver.kt) | Послойный конструктивный алгоритм и оптимизация последовательности ходов |
-| **Игровое поле** | [`PuzzleBoard.kt`](../app/src/main/java/com/example/ui/components/PuzzleBoard.kt) | Плитки-кейкапы с физикой пружин, свайпами и анимацией конфетти |
+| **Игровое поле** | [`PuzzleBoard.kt`](../app/src/main/java/com/example/ui/components/PuzzleBoard.kt) · [`SplashOverlay.kt`](../app/src/main/java/com/example/ui/components/SplashOverlay.kt) | Плитки-кейкапы с физикой пружин, свайпами, анимацией входа и конфетти |
 | **HUD и диалоги** | [`GameHudAndControls.kt`](../app/src/main/java/com/example/ui/components/GameHudAndControls.kt) | Статистика, плеер решения, выбор сетки, модальное окно победы и справка |
 | **Своя доска** | [`SetupScreen.kt`](../app/src/main/java/com/example/ui/screens/SetupScreen.kt) | Быстрая палитра плиток, цифровая клавиатура, Drag & Drop лоток и контроль решаемости |
 | **Настройки** | [`SettingsScreen.kt`](../app/src/main/java/com/example/ui/screens/SettingsScreen.kt) | Живой предпросмотр `3×3`, выбор языка, палитр, физики и параметров решателя |
@@ -148,7 +149,7 @@
 1. **Клонируйте репозиторий** и откройте в **Android Studio** (JDK 21 / Android SDK 36) или используйте **Gradle 9.3.1**:
    ```bash
    git clone <url-репозитория>
-   cd 15-puzzle-android
+   cd slidegrid-android
    ```
 2. **Запуск юнит- и Robolectric-тестов**:
    ```bash

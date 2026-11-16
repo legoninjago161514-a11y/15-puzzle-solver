@@ -22,6 +22,6 @@ dependencyResolutionManagement {
   }
 }
 
-rootProject.name = "15 Puzzle"
+rootProject.name = "SlideGrid"
 
 include(":app")
