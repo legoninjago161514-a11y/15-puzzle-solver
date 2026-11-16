@@ -1,0 +1,91 @@
+name: Build & Release APK
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: 'Release version tag (e.g. v1.0.0)'
+        required: true
+        default: 'v1.0.0'
+
+permissions:
+  contents: write
+
+jobs:
+  build-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Set up Gradle 9.3.1
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '9.3.1'
+
+      - name: Prepare keystores
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+          STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        run: |
+          if [ -f debug.keystore.base64 ] && [ ! -f debug.keystore ]; then
+            base64 -d debug.keystore.base64 > debug.keystore
+          fi
+          STORE_PW="${STORE_PASSWORD:-15puzzle_release}"
+          KEY_PW="${KEY_PASSWORD:-$STORE_PW}"
+          if [ -n "$KEYSTORE_BASE64" ]; then
+            echo "$KEYSTORE_BASE64" | base64 -d > my-upload-key.jks
+          elif [ ! -f my-upload-key.jks ]; then
+            keytool -genkeypair -noprompt -keystore my-upload-key.jks -alias upload \
+              -keyalg RSA -keysize 2048 -validity 10000 \
+              -storepass "$STORE_PW" -keypass "$KEY_PW" \
+              -dname "CN=15 Puzzle, OU=App, O=15Puzzle, L=World, C=US"
+          fi
+
+      - name: Run unit tests
+        run: gradle :app:testDebugUnitTest
+
+      - name: Build signed Release APK
+        env:
+          KEYSTORE_PATH: ${{ github.workspace }}/my-upload-key.jks
+          STORE_PASSWORD: ${{ secrets.STORE_PASSWORD || '15puzzle_release' }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD || secrets.STORE_PASSWORD || '15puzzle_release' }}
+        run: gradle :app:assembleRelease
+
+      - name: Rename APK for release
+        id: meta
+        run: |
+          TAG="${{ github.event.inputs.tag_name || github.ref_name }}"
+          if [ -z "$TAG" ] || [ "$TAG" = "main" ]; then
+            TAG="v1.0.0"
+          fi
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          cp app/build/outputs/apk/release/app-release.apk "15-puzzle-${TAG}.apk"
+
+      - name: Upload APK workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: 15-puzzle-apk-${{ steps.meta.outputs.tag }}
+          path: 15-puzzle-${{ steps.meta.outputs.tag }}.apk
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.meta.outputs.tag }}
+          name: 15 Puzzle ${{ steps.meta.outputs.tag }}
+          files: 15-puzzle-${{ steps.meta.outputs.tag }}.apk
+          generate_release_notes: true

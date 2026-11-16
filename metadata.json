@@ -1,0 +1,6 @@
+{
+  "name": "15 Puzzle",
+  "description": "A beautiful 15-puzzle game and solver app.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

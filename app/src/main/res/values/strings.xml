@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">15 Puzzle</string>
+    <string name="shuffle_button">Случайное перемешивание</string>
+    <string name="app_title">Пятнашки</string>
+    <string name="solve_button">Решить</string>
+    <string name="solving">Поиск решения...</string>
+    <string name="next_step">Следующий шаг</string>
+    <string name="exit_solution">Отмена</string>
+    <string name="setup_board">Настроить доску</string>
+    <string name="settings">Настройки</string>
+    <string name="setup_mode_input">Ввод</string>
+    <string name="setup_mode_place">Сборка</string>
+    <string name="setup_tray_random">Случайно</string>
+    <string name="setup_tray_order">По порядку</string>
+    <string name="setup_confirm">Подтвердить</string>
+    <string name="setup_clear">Очистить</string>
+    <string name="setup_title">Настройка доски</string>
+    <string name="grid_size_title">Размер сетки</string>
+    <string name="grid_size_format">%1$d × %2$d</string>
+    <string name="apply">Применить</string>
+    <string name="clear_all">Очистить всё</string>
+    <string name="enter_number_hint">Число (0 — пустая ячейка):</string>
+    <string name="available_numbers">Свободные:</string>
+    <string name="speed_label">Скорость</string>
+    <string name="fast_forward">В конец</string>
+    <string name="status_solved">Собрано</string>
+    <string name="status_analyzing">Анализ алгоритмом...</string>
+    <string name="step_label">Шаг</string>
+</resources>
